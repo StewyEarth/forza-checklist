@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Forza Checklist</title>
+</head>
+
+<body>
+    <header class="siteHeader">
+        <h1>Forza Checklist</h1>
+        <p class="subtitle">Track your FH6 collection — clean, fast, and responsive. Info is from <a
+                href="https://forza.net/fh6cars" target="_blank">Forza.net</a></p>
+        <p class="totalCars">Total cars: <span id="carsShown">618/</span><span id="totalCars" class="muted">0</span>
+        </p>
+    </header>
+
+    <main class="container">
+        <h2 class="filtersHeader">Filters: </h2>
+        <div class="filters">
+            <select name="collectionStatus" id="collectionStatusFilter">
+                <option value="All">Collection Status</option>
+                <option value="Not Owned">Not Owned</option>
+                <option value="Not Pictured">Not Pictured</option>
+            </select>
+            <select name="carBrand" id="carBrandFilter">
+                <option value="All">All Brands</option>
+            </select>
+            <select name="carClass" id="carClassFilter">
+                <option value="All">All Classes</option>
+                <option value="R">R</option>
+                <option value="S2">S2</option>
+                <option value="S1">S1</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+
+            </select>
+            <select name="carCountry" id="carCountryFilter">
+                <option value="All">All Countries</option>
+            </select>
+            <select name="carYear" id="carYearFilter">
+                <option value="All">All Years</option>
+            </select>
+            <select name="carType" id="carTypeFilter">
+                <option value="All">All Types</option>
+            </select>
+            <form id="packFilterForm">
+                <label for="hidePacksCheckbox">Hide pack cars</label>
+                <input type="checkbox" id="hidePacksCheckbox">
+            </form>
+            <input type="text" id="searchInput" placeholder="Search by car name...">
+        </div>
+        <div class="tableWrap">
+            <table class="carsTable">
+                <thead>
+                    <tr class="tableHeader">
+                        <th>Owned? <span class="sort-indicator"></span></th>
+                        <th>Picture? <span class="sort-indicator"></span></th>
+                        <th id="carBrand">Brand <span class="sort-indicator"></span></th>
+                        <th id="carName">Name <span class="sort-indicator"></span></th>
+                        <th id="carYear">Year <span class="sort-indicator"></span></th>
+                        <th id="carType">Car Type <span class="sort-indicator"></span></th>
+                        <th id="carClass">Class <span class="sort-indicator"></span></th>
+                        <th id="carCountry">Country <span class="sort-indicator"></span></th>
+                        <th id="carHowToGet">How to get <span class="sort-indicator"></span></th>
+                        <th id="carPackNeeded">Pack needed? <span class="sort-indicator"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <div class="templateElems hidden">
+        <table>
+            <tbody>
+                <tr id="carRowTemplate" class="hidden">
+                    <td id="ownedCheckbox">
+                        <label>
+                            <input type="checkbox" id="ownedCheckboxInput">
+                            <img id="owned-inactive" src="/assets/img/owned-inactive.svg"
+                                alt="Car inactive picture icon">
+                            <img id="owned-active" src="/assets/img/owned-active.svg" alt="Car active picture icon">
+                        </label>
+                    </td>
+                    <td id="picturedCheckbox">
+                        <label>
+                            <input type="checkbox" id="picturedCheckboxInput">
+                            <img id="picture-inactive" src="/assets/img/picture-inactive.svg"
+                                alt="Car inactive picture icon">
+                            <img id="picture-active" src="/assets/img/picture-active.svg" alt="Car active picture icon">
+                        </label>
+                    </td>
+                    <td class="carBrand">Abarth</td>
+                    <td class="carName">Abarth 595 esseesse</td>
+                    <td class="carYear">1968</td>
+                    <td class="carType">Cult Cars</td>
+                    <td class="carClass">100 D</td>
+                    <td class="carCountry">Italy</td>
+                    <td class="carHowToGet">Autoshow, Wheelspin</td>
+                    <td class="carPackNeeded"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="module" src="assets/js/script.js"></script>
+</body>
+
+</html>

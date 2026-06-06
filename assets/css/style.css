@@ -1,0 +1,323 @@
+:root {
+  --bg: #0f1113;
+  --card: #0f1720;
+  --muted: #9aa4ad;
+  --accent: #3dd3ff;
+  --accent-2: #7afcff;
+  --row-even: #0b1114;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.hidden {
+  display: none;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  background: var(--bg);
+  color: #e6eef3;
+  -webkit-font-smoothing: antialiased;
+  padding: 28px;
+}
+
+.siteHeader {
+  max-width: 70vw;
+  margin: 0 auto 18px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: 0 6px 18px rgba(2, 6, 12, 0.6);
+}
+.siteHeader h1 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+.siteHeader .subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Modern filter bar styles */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(2,6,12,0.5);
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+}
+
+.filters select,
+.filters input[type="text"] {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  min-width: 120px;
+  outline: none;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
+  cursor: pointer;
+}
+
+.filters select:focus,
+.filters input[type="text"]:focus {
+  box-shadow: 0 4px 18px rgba(61,211,255,0.06);
+  border-color: rgba(61,211,255,0.18);
+  transform: translateY(-1px);
+  color: var(--accent);
+}
+.filters select option {
+  background: var(--card);
+  border: none;
+  margin: 0;
+  padding: .2em;
+  border-radius: 0;
+  cursor: pointer;
+}
+.filters select option:hover {
+  background: var(--card);
+  color: var(--accent);
+}
+.filters input[type="text"]{
+  cursor: text;
+}
+
+#searchInput {
+  min-width: 240px;
+  flex: 1 1 260px;
+}
+
+#packFilterForm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 6px;
+}
+
+#packFilterForm label {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#hidePacksCheckbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .filters select,
+  .filters input[type="text"] {
+    width: 100%;
+    min-width: 0;
+  }
+  #packFilterForm {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}
+.container {
+  max-width: 70vw;
+  margin: 1em auto 1em auto;
+  padding: 0 1em 2em 1em;
+}
+.tableHeader {
+  font-size: large;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  color: var(--accent);
+}
+.tableHeader th {
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, #071018, #0f1720);
+  color: var(--accent);
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgb(24, 24, 24);
+}
+.tableHeader th:hover {
+  color: var(--accent-2);
+  transition: color 0.12s ease;
+}
+
+#picturedCheckbox img,
+#ownedCheckbox img {
+  transition: filter 0.12s ease;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+#picturedCheckbox img:hover,
+#ownedCheckbox img:hover {
+  filter: drop-shadow(0 0 2px var(--accent-2));
+}
+#picturedCheckboxInput,
+#ownedCheckboxInput {
+  display: none;
+}
+#picture-inactive,
+#owned-inactive {
+  display: block;
+  filter: drop-shadow(0 0 2px red);
+}
+#picture-active,
+#owned-active {
+  display: none;
+  filter: drop-shadow(0 0 2px var(--accent-2));
+}
+
+#picturedCheckboxInput:checked + #picture-inactive,
+#ownedCheckboxInput:checked + #owned-inactive {
+  display: none;
+}
+
+#picturedCheckboxInput:checked + #picture-inactive + #picture-active,
+#ownedCheckboxInput:checked + #owned-inactive + #owned-active {
+  display: block;
+}
+
+.sort-indicator {
+  position: absolute;
+  top: 50% - 4px;
+  right: 0;
+  margin-left: 6px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  color: white;
+}
+.sort-indicator:hover {
+  color: var(--accent-2);
+}
+.tableWrap {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 30px rgba(2, 6, 12, 0.6);
+  overflow: auto;
+}
+
+table.carsTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 900px;
+  margin-bottom: 12px;
+}
+table.carsTable thead th:first-child {
+  width: 72px;
+}
+table.carsTable thead th:nth-child(2) {
+  width: 88px;
+}
+
+tbody tr {
+  transition: background 0.12s ease;
+}
+tbody tr:nth-child(even) {
+  background: var(--row-even);
+}
+tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(125, 200, 255, 0.02),
+    rgba(125, 200, 255, 0.03)
+  );
+}
+tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: middle;
+  color: #d8e9ef;
+}
+
+td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  accent-color: var(--accent);
+}
+td:nth-child(2) {
+  width: 88px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 920px) {
+  body {
+    padding: 14px;
+  }
+  .siteHeader,
+  .container {
+    padding: 10px;
+  }
+  table.carsTable {
+    min-width: 760px;
+  }
+}
+
+@media (max-width: 640px) {
+  table.carsTable thead th:nth-child(4),
+  table.carsTable thead th:nth-child(5),
+  table.carsTable thead th:nth-child(6),
+  table.carsTable thead th:nth-child(7) {
+    display: none;
+  }
+  table.carsTable {
+    min-width: 560px;
+  }
+}
+
+#totalCars {
+  font-weight: bold;
+  color: var(--accent-2);
+  font-size: 1.2rem;
+}
+.totalCars {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
