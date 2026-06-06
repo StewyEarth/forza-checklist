@@ -30,14 +30,13 @@ import carsData from "../data/cars.json" with { type: "json" };
 //     });
 //     console.log(urls)
 // })();
-
-
 let cars;
 if (typeof (Storage) !== "undefined") {
     console.log("localStorage is supported");
     if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== "undefined") {
         console.log("cars found in localStorage");
         cars = JSON.parse(localStorage.getItem("cars"));
+        console.log(cars)
     } else {
         cars = carsData.cars;
     }
