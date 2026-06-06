@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Forza Checklist</title>
 </head>
 
@@ -12,7 +12,9 @@
     <header class="siteHeader">
         <h1>Forza Checklist</h1>
         <p class="subtitle">Track your FH6 collection — clean, fast, and responsive. Info is from <a
-                href="https://forza.net/fh6cars" target="_blank">Forza.net</a></p>
+                href="https://forza.net/fh6cars" target="_blank">Forza.net</a>. Car images are from <a
+                href="https://www.ign.com/wikis/forza-horizon-6/Car_List" target="_blank">Ign.com</a> & <a
+                target="_blank" href="https://forza.fandom.com/wiki/Forza_Horizon_6"> FH6 Wiki</a> </p>
         <p class="totalCars">Total cars: <span id="carsShown">618/</span><span id="totalCars" class="muted">0</span>
         </p>
     </header>
@@ -58,6 +60,7 @@
             <table class="carsTable">
                 <thead>
                     <tr class="tableHeader">
+                        <th>Image</th>
                         <th>Owned? <span class="sort-indicator"></span></th>
                         <th>Picture? <span class="sort-indicator"></span></th>
                         <th id="carBrand">Brand <span class="sort-indicator"></span></th>
@@ -79,20 +82,22 @@
         <table>
             <tbody>
                 <tr id="carRowTemplate" class="hidden">
-                    <td id="ownedCheckbox">
+                    <td class="carImage"><img src="assets/img/cars/unknown.png" alt="unknown"></td>
+                    <td class="ownedCheckbox">
                         <label>
-                            <input type="checkbox" id="ownedCheckboxInput">
-                            <img id="owned-inactive" src="./assets/img/owned-inactive.svg"
+                            <input type="checkbox" class="ownedCheckboxInput">
+                            <img class="owned-inactive" src="./assets/img/owned-inactive.svg"
                                 alt="Car inactive picture icon">
-                            <img id="owned-active" src="./assets/img/owned-active.svg" alt="Car active picture icon">
+                            <img class="owned-active" src="./assets/img/owned-active.svg" alt="Car active picture icon">
                         </label>
                     </td>
-                    <td id="picturedCheckbox">
+                    <td class="picturedCheckbox">
                         <label>
-                            <input type="checkbox" id="picturedCheckboxInput">
-                            <img id="picture-inactive" src="./assets/img/picture-inactive.svg"
+                            <input type="checkbox" class="picturedCheckboxInput">
+                            <img class="picture-inactive" src="./assets/img/picture-inactive.svg"
                                 alt="Car inactive picture icon">
-                            <img id="picture-active" src="./assets/img/picture-active.svg" alt="Car active picture icon">
+                            <img class="picture-active" src="./assets/img/picture-active.svg"
+                                alt="Car active picture icon">
                         </label>
                     </td>
                     <td class="carBrand">Abarth</td>
@@ -107,7 +112,7 @@
             </tbody>
         </table>
     </div>
-    <script type="module" src="assets/js/script.js"></script>
+    <script type="module" src="./assets/js/script.js"></script>
 </body>
 
 </html>

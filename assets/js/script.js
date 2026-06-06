@@ -20,6 +20,18 @@ import carsData from "../data/cars.json" with { type: "json" };
 // });
 // console.log(cars)
 
+// (function () {
+//     let images = document.querySelectorAll(".modal-content img.progressive-image");
+//     let urls = [];
+//     images.forEach((image, index) => {
+//         let url = image.src.split(".png")
+//         url = url[0] + ".png"
+//         urls.push(url);
+//     });
+//     console.log(urls)
+// })();
+
+
 let cars;
 if (typeof (Storage) !== "undefined") {
     console.log("localStorage is supported");
@@ -29,20 +41,14 @@ if (typeof (Storage) !== "undefined") {
     } else {
         cars = carsData.cars;
     }
-    
+
     localStorage.setItem("cars", JSON.stringify(cars));
-    // Store
-    // localStorage.setItem("bgcolor", "yellow");
-    // Retrieve
 }
-
-
 
 let sorting = {
     index: undefined,
     direction: "asc"
 }
-
 
 let carTable = document.querySelector("tbody");
 let totalCars = document.getElementById("totalCars");
@@ -151,25 +157,26 @@ cars.forEach(car => {
     let carRow = carRowTemplate.cloneNode(true);
     // let carRow = document.createElement("tr");
 
-    carRow.children[0].querySelector("input[type='checkbox']").checked = car.owned;
-    carRow.children[1].querySelector("input[type='checkbox']").checked = car.photographed;
-    carRow.children[2].textContent = car.brand;
-    carRow.children[3].textContent = car.name;
-    carRow.children[4].textContent = car.year;
-    carRow.children[5].textContent = car.carType;
-    carRow.children[6].textContent = car.class;
-    carRow.children[7].textContent = car.county;
-    carRow.children[8].textContent = car.collection;
-    carRow.children[9].textContent = car.pack;
+    carRow.children[0].querySelector("img").src = "./assets/img/cars/" + car.img;
+    carRow.querySelector(".ownedCheckboxInput").checked = car.owned;
+    carRow.querySelector(".picturedCheckboxInput").checked = car.photographed;
+    carRow.children[3].textContent = car.brand;
+    carRow.children[4].textContent = car.name;
+    carRow.children[5].textContent = car.year;
+    carRow.children[6].textContent = car.carType;
+    carRow.children[7].textContent = car.class;
+    carRow.children[8].textContent = car.county;
+    carRow.children[9].textContent = car.collection;
+    carRow.children[10].textContent = car.pack;
     carRow.classList.remove("hidden");
 
 
-    carRow.children[0].querySelector("input[type='checkbox']").addEventListener("change", () => {
-        car.owned = carRow.children[0].querySelector("input[type='checkbox']").checked;
+    carRow.querySelector(".ownedCheckboxInput").addEventListener("change", () => {
+        car.owned = carRow.querySelector(".ownedCheckboxInput").checked;
         localStorage.setItem("cars", JSON.stringify(cars));
     });
-    carRow.children[1].querySelector("input[type='checkbox']").addEventListener("change", () => {
-        car.photographed = carRow.children[1].querySelector("input[type='checkbox']").checked;
+    carRow.querySelector(".picturedCheckboxInput").addEventListener("change", () => {
+        car.photographed = carRow.querySelector(".picturedCheckboxInput").checked;
         localStorage.setItem("cars", JSON.stringify(cars));
     });
 
@@ -200,8 +207,8 @@ collectionStatusFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let pictureCheckbox = row.children[1].querySelector("input[type='checkbox']").checked;
-        let ownedCheckbox = row.children[0].querySelector("input[type='checkbox']").checked;
+        let pictureCheckbox = row.querySelector(".picturedCheckboxInput").checked;
+        let ownedCheckbox = row.querySelector(".ownedCheckboxInput").checked;
         let showCar = false;
         if (selectedStatus === "All") {
             row.classList.remove("hidden");
@@ -219,7 +226,7 @@ carCountryFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let country = row.children[7].textContent;
+        let country = row.querySelector(".carCountry").textContent;
         if (selectedCountry === "All" || country === selectedCountry) {
             carsShown++;
             row.classList.remove("hidden");
@@ -235,7 +242,7 @@ carTypeFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let type = row.children[5].textContent;
+        let type = row.querySelector(".carType").textContent;
         if (selectedType === "All" || type === selectedType) {
             carsShown++;
             row.classList.remove("hidden");
@@ -252,7 +259,7 @@ carYearFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let year = row.children[4].textContent;
+        let year = row.querySelector(".carYear").textContent;
         if (selectedYear === "All" || year === selectedYear) {
             carsShown++;
             row.classList.remove("hidden");
@@ -268,7 +275,7 @@ carPackFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let pack = row.children[9].textContent;
+        let pack = row.querySelector(".carPackNeeded").textContent;
         if (!hidePacks || pack === "") {
             carsShown++;
             row.classList.remove("hidden");
@@ -299,7 +306,7 @@ searchInput.addEventListener("input", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let name = row.children[3].textContent.toLowerCase();
+        let name = row.querySelector(".carName").textContent.toLowerCase();
         if (name.includes(searchTerm)) {
             carsShown++;
             row.classList.remove("hidden");

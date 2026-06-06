@@ -38,7 +38,7 @@ body {
 }
 
 .siteHeader {
-  max-width: 70vw;
+  max-width: 90vw;
   margin: 0 auto 18px;
   padding: 18px 22px;
   border-radius: 12px;
@@ -71,31 +71,38 @@ body {
   align-items: center;
   gap: 10px;
   padding: 10px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
-  border: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(2,6,12,0.5);
+  box-shadow: 0 6px 18px rgba(2, 6, 12, 0.5);
   flex-wrap: wrap;
   margin-bottom: 1em;
 }
 
 .filters select,
 .filters input[type="text"] {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   color: inherit;
   padding: 8px 10px;
   border-radius: 8px;
   min-width: 120px;
   outline: none;
-  transition: box-shadow 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
+  transition:
+    box-shadow 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.06s ease;
   cursor: pointer;
 }
 
 .filters select:focus,
 .filters input[type="text"]:focus {
-  box-shadow: 0 4px 18px rgba(61,211,255,0.06);
-  border-color: rgba(61,211,255,0.18);
+  box-shadow: 0 4px 18px rgba(61, 211, 255, 0.06);
+  border-color: rgba(61, 211, 255, 0.18);
   transform: translateY(-1px);
   color: var(--accent);
 }
@@ -103,7 +110,7 @@ body {
   background: var(--card);
   border: none;
   margin: 0;
-  padding: .2em;
+  padding: 0.2em;
   border-radius: 0;
   cursor: pointer;
 }
@@ -111,7 +118,7 @@ body {
   background: var(--card);
   color: var(--accent);
 }
-.filters input[type="text"]{
+.filters input[type="text"] {
   cursor: text;
 }
 
@@ -155,7 +162,7 @@ body {
   }
 }
 .container {
-  max-width: 70vw;
+  max-width: 90vw;
   margin: 1em auto 1em auto;
   padding: 0 1em 2em 1em;
 }
@@ -180,40 +187,45 @@ body {
   color: var(--accent-2);
   transition: color 0.12s ease;
 }
-
-#picturedCheckbox img,
-#ownedCheckbox img {
+.carImage img {
+  max-width: 150px;
+  pointer-events: none;
+  user-select: none;
+}
+.picturedCheckbox img,
+.ownedCheckbox img {
   transition: filter 0.12s ease;
   width: 2em;
   height: 2em;
+  user-select: none;
   cursor: pointer;
 }
-#picturedCheckbox img:hover,
-#ownedCheckbox img:hover {
+.picturedCheckbox img:hover,
+.ownedCheckbox img:hover {
   filter: drop-shadow(0 0 2px var(--accent-2));
 }
-#picturedCheckboxInput,
-#ownedCheckboxInput {
+.picturedCheckboxInput,
+.ownedCheckboxInput {
   display: none;
 }
-#picture-inactive,
-#owned-inactive {
+.picture-inactive,
+.owned-inactive {
   display: block;
   filter: drop-shadow(0 0 2px red);
 }
-#picture-active,
-#owned-active {
+.picture-active,
+.owned-active {
   display: none;
   filter: drop-shadow(0 0 2px var(--accent-2));
 }
 
-#picturedCheckboxInput:checked + #picture-inactive,
-#ownedCheckboxInput:checked + #owned-inactive {
+.picturedCheckboxInput:checked + .picture-inactive,
+.ownedCheckboxInput:checked + .owned-inactive {
   display: none;
 }
 
-#picturedCheckboxInput:checked + #picture-inactive + #picture-active,
-#ownedCheckboxInput:checked + #owned-inactive + #owned-active {
+.picturedCheckboxInput:checked + .picture-inactive + .picture-active,
+.ownedCheckboxInput:checked + .owned-inactive + .owned-active {
   display: block;
 }
 
