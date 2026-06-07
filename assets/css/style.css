@@ -371,6 +371,8 @@ td:nth-child(2) {
   max-width: 80vw;
   display: block;
   animation: zoomIn 0.5s;
+  user-select: none;
+  pointer-events: none;
 }
 
 @keyframes zoomIn {
@@ -396,12 +398,6 @@ td:nth-child(2) {
 }
 
 @media (max-width: 640px) {
-  table.carsTable thead th:nth-child(4),
-  table.carsTable thead th:nth-child(5),
-  table.carsTable thead th:nth-child(6),
-  table.carsTable thead th:nth-child(7) {
-    display: none;
-  }
   table.carsTable {
     min-width: 560px;
   }
