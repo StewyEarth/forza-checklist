@@ -64,48 +64,30 @@ function updateData(carsData, updatedCars) {
 }
 
 function initializeCars() {
-    if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== undefined) {
-        console.log(localStorage.getItem("version"))
+    let localVersion = Number(localStorage.getItem("version"));
+    let dataVersion = carsData.version;
+    let localCars = localStorage.getItem("cars");
+    let userVersion = localVersion < dataVersion ? dataVersion : localVersion;
+
+    if (localCars !== null && localCars !== undefined) {
         cars = JSON.parse(localStorage.getItem("cars"));
-        if (localStorage.getItem("version") == null || Number(localStorage.getItem("version")) < carsData.version) {
-            localStorage.setItem("version", carsData.version);
+        if (localVersion == null || localVersion < dataVersion) {
+            userVersion = dataVersion
             cars = updateData(cars, carsData.cars)
-            versionElement.textContent = carsData.version;
+            versionElement.textContent = dataVersion;
+            localStorage.setItem("version", dataVersion);
             localStorage.setItem("cars", JSON.stringify(cars));
         }
-        cars = JSON.parse(localStorage.getItem("cars"));
-        versionElement.textContent = carsData.version;
+        cars = JSON.parse(localCars);
+        versionElement.textContent = userVersion;
     } else {
-        versionElement.textContent = carsData.version;
+        versionElement.textContent = userVersion;
         cars = carsData.cars;
         localStorage.setItem("cars", JSON.stringify(cars));
-        localStorage.setItem("version", carsData.version);
+        localStorage.setItem("version", dataVersion);
     }
 }
 initializeCars();
-
-// function initializeCars() {
-//     if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== undefined) {
-//         console.log(localStorage.getItem("version"))
-//         cars = JSON.parse(localStorage.getItem("cars"));
-//         if (localStorage.getItem("version") == null || Number(localStorage.getItem("version")) < carsData.version) {
-//             localStorage.setItem("version", carsData.version);
-//             cars = updateData(cars, carsData.cars)
-//             versionElement.textContent = carsData.version;
-//             localStorage.setItem("cars", JSON.stringify(cars));
-//         }
-//         cars = JSON.parse(localStorage.getItem("cars"));
-//         versionElement.textContent = carsData.version;
-//     } else {
-//         versionElement.textContent = carsData.version;
-//         cars = carsData.cars;
-//         localStorage.setItem("cars", JSON.stringify(cars));
-//         localStorage.setItem("version", carsData.version);
-//     }
-// }
-// initializeCars();
-
-
 
 let sorting = {
     index: undefined,
