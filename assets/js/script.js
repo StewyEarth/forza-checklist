@@ -79,9 +79,9 @@ function initializeCars() {
             localStorage.setItem("cars", JSON.stringify(cars));
         }
         cars = JSON.parse(localCars);
-        versionElement.textContent = userVersion;
+        versionElement.textContent = userVersion+ ".0";
     } else {
-        versionElement.textContent = userVersion;
+        versionElement.textContent = userVersion + ".0";
         cars = carsData.cars;
         localStorage.setItem("cars", JSON.stringify(cars));
         localStorage.setItem("version", dataVersion);
