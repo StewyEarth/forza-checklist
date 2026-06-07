@@ -12,7 +12,7 @@
 <body>
     <header class="siteHeader">
         <h1>Forza Checklist v<span id="version"></span></h1>
-        <p class="subtitle">Track your FH6 collection — clean, fast, and responsive. Info is from <a
+        <p class="subtitle">Track your FH6 collection - clean, fast, and responsive. Info is from <a
                 href="https://forza.net/fh6cars" target="_blank">Forza.net</a>. Car images are from <a
                 href="https://www.ign.com/wikis/forza-horizon-6/Car_List" target="_blank">Ign.com</a> & <a
                 target="_blank" href="https://forza.fandom.com/wiki/Forza_Horizon_6"> FH6 Wiki</a> </p>
@@ -22,9 +22,13 @@
 
     <main class="container">
         <div class="imgModal hidden">
+            <div class="imgModalContent">
+                <img src="./assets/img/cars/unknown.png" alt="" class="imgModal-Picture">
+                <h2 class="imgModalCarinfo"></h2>
+            </div>
             <button class="imgModal-prev"><</button>
-            <img src="./assets/img/cars/unknown.png" alt="">
             <button class="imgModal-next">></button>
+            <button class="imgModal-close">X</button>
         </div>
         <h2 class="filtersHeader">Filters: </h2>
         <div class="filters">

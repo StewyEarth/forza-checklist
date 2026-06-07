@@ -52,7 +52,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.4px;
 }
-#version{
+#version {
   color: var(--accent);
 }
 .siteHeader .subtitle {
@@ -190,9 +190,14 @@ body {
 }
 .carImage img {
   max-width: 150px;
-  pointer-events: none;
   user-select: none;
+  cursor: pointer;
+  transition: all 0.1s;
 }
+.carImage img:hover {
+  transform: scale(1.1);
+}
+
 .picturedCheckbox img,
 .ownedCheckbox img {
   transition: filter 0.12s ease;
@@ -200,14 +205,17 @@ body {
   height: 2em;
   user-select: none;
   cursor: pointer;
+  transition: transform 0.1s;
 }
-.ownedCheckbox label, .picturedCheckbox label{
+.ownedCheckbox label,
+.picturedCheckbox label {
   display: flex;
   justify-content: center;
 }
 .picturedCheckbox img:hover,
 .ownedCheckbox img:hover {
   filter: drop-shadow(0 0 2px var(--accent-2));
+  transform: scale(1.1);
 }
 .picturedCheckboxInput,
 .ownedCheckboxInput {
@@ -304,17 +312,74 @@ td:nth-child(2) {
   font-size: 0.95rem;
 }
 
-.imgModal{
-  position: absolute;
+.imgModal {
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(2, 6, 12, 0.5);
-  display: flex;
+  background-color: rgba(2, 6, 12, 0.8);
+  z-index: 999;
+  align-content: center;
+  justify-content: center;
 }
-.imgModal img{
+.imgModal button {
+  position: absolute;
+  padding: 1em;
+  background-color: transparent;
+  color: #d8e9ef;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: transform 0.1s;
+}
+.imgModal button:hover {
+  transform: scale(1.2);
+  color: var(--accent);
+}
+
+.imgModalContent {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.imgModalCarinfo {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
   width: 100%;
+  border-radius: 2em;
+}
+
+.imgModal .imgModal-prev {
+  left: 2em;
+  top: 50%;
+}
+.imgModal .imgModal-next {
+  right: 2em;
+  top: 50%;
+}
+.imgModal .imgModal-close {
+  right: 2em;
+  top: 2em;
+}
+.imgModal img {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 80vw;
+  display: block;
+  animation: zoomIn 0.5s;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 920px) {

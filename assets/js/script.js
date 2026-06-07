@@ -44,6 +44,12 @@ let carsShownElement = document.getElementById("carsShown");
 let searchInput = document.getElementById("searchInput");
 let versionElement = document.querySelector("#version");
 
+let imgModalElement = document.querySelector(".imgModal");
+let imgModalPictureElement = document.querySelector(".imgModal-Picture");
+let imgModalCloseBtnElement = document.querySelector(".imgModal-close");
+let imgModalCarinfoElem = document.querySelector(".imgModalCarinfo");
+
+
 function updateData(carsData, updatedCars) {
     console.log("updating cars")
     // Build lookup map from stored data
@@ -79,7 +85,7 @@ function initializeCars() {
             localStorage.setItem("cars", JSON.stringify(cars));
         }
         cars = JSON.parse(localCars);
-        versionElement.textContent = userVersion+ ".0";
+        versionElement.textContent = userVersion + ".0";
     } else {
         versionElement.textContent = userVersion + ".0";
         cars = carsData.cars;
@@ -211,7 +217,17 @@ cars.forEach(car => {
         localStorage.setItem("cars", JSON.stringify(cars));
     });
 
+    carRow.querySelector(".carImage").addEventListener("click", () => {
+        imgModalElement.classList.remove("hidden");
+        imgModalPictureElement.src = "./assets/img/cars/" + car.img;
+        imgModalCarinfoElem.textContent = `${car.year} - ${car.name}`
+    });
+
     carTable.appendChild(carRow);
+});
+
+imgModalCloseBtnElement.addEventListener("click", () => {
+    imgModalElement.classList.add("hidden");
 });
 
 
