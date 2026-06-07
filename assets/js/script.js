@@ -31,24 +31,6 @@ import carsData from "../data/cars.json" with { type: "json" };
 //     console.log(urls)
 // })();
 let cars;
-if (typeof (Storage) !== "undefined") {
-    console.log("localStorage is supported");
-    if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== "undefined") {
-        console.log("cars found in localStorage");
-        cars = JSON.parse(localStorage.getItem("cars"));
-        console.log(cars)
-    } else {
-        cars = carsData.cars;
-    }
-
-    localStorage.setItem("cars", JSON.stringify(cars));
-}
-
-let sorting = {
-    index: undefined,
-    direction: "asc"
-}
-
 let carTable = document.querySelector("tbody");
 let totalCars = document.getElementById("totalCars");
 let tableHeader = document.querySelector(".tableHeader");
@@ -60,7 +42,75 @@ let carYearFilter = document.getElementById("carYearFilter");
 let carPackFilter = document.getElementById("hidePacksCheckbox");
 let carsShownElement = document.getElementById("carsShown");
 let searchInput = document.getElementById("searchInput");
+let versionElement = document.querySelector("#version");
 
+function updateData(carsData, updatedCars) {
+    console.log("updating cars")
+    // Build lookup map from stored data
+    const storedMap = Object.fromEntries(
+        carsData.map(car => [car.id ?? car.name, car])
+    );
+
+    // Merge master data with stored user fields
+    return updatedCars.map(masterCar => {
+        const storedCar = storedMap[masterCar.id ?? masterCar.name];
+
+        return {
+            ...masterCar, // new master data (img, id, etc.)
+            owned: storedCar?.owned ?? false,
+            photographed: storedCar?.photographed ?? false
+        };
+    });
+}
+
+function initializeCars() {
+    if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== undefined) {
+        console.log(localStorage.getItem("version"))
+        cars = JSON.parse(localStorage.getItem("cars"));
+        if (localStorage.getItem("version") == null || Number(localStorage.getItem("version")) < carsData.version) {
+            localStorage.setItem("version", carsData.version);
+            cars = updateData(cars, carsData.cars)
+            versionElement.textContent = carsData.version;
+            localStorage.setItem("cars", JSON.stringify(cars));
+        }
+        cars = JSON.parse(localStorage.getItem("cars"));
+        versionElement.textContent = carsData.version;
+    } else {
+        versionElement.textContent = carsData.version;
+        cars = carsData.cars;
+        localStorage.setItem("cars", JSON.stringify(cars));
+        localStorage.setItem("version", carsData.version);
+    }
+}
+initializeCars();
+
+// function initializeCars() {
+//     if (localStorage.getItem("cars") !== null && localStorage.getItem("cars") !== undefined) {
+//         console.log(localStorage.getItem("version"))
+//         cars = JSON.parse(localStorage.getItem("cars"));
+//         if (localStorage.getItem("version") == null || Number(localStorage.getItem("version")) < carsData.version) {
+//             localStorage.setItem("version", carsData.version);
+//             cars = updateData(cars, carsData.cars)
+//             versionElement.textContent = carsData.version;
+//             localStorage.setItem("cars", JSON.stringify(cars));
+//         }
+//         cars = JSON.parse(localStorage.getItem("cars"));
+//         versionElement.textContent = carsData.version;
+//     } else {
+//         versionElement.textContent = carsData.version;
+//         cars = carsData.cars;
+//         localStorage.setItem("cars", JSON.stringify(cars));
+//         localStorage.setItem("version", carsData.version);
+//     }
+// }
+// initializeCars();
+
+
+
+let sorting = {
+    index: undefined,
+    direction: "asc"
+}
 
 let brands = [...new Set(cars.map(car => car.brand))].sort();
 brands.forEach(brand => {

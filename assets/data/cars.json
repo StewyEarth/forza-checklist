@@ -1,5 +1,5 @@
 {
-  "update": 3,
+  "version": 1,
   "cars": [
     {
       "brand": "Abarth",
@@ -320,7 +320,7 @@
       "pack": "",
       "photograped": false,
       "owned": false,
-      "img": "unknown.png",
+      "img": "ari-nomad-16.png",
       "id": 23
     },
     {
@@ -334,7 +334,7 @@
       "pack": "",
       "photograped": false,
       "owned": false,
-      "img": "unknown.png",
+      "img": "ast-db5vantage-64.png",
       "id": 24
     },
     {
