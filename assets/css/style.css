@@ -183,7 +183,7 @@ body {
   background: linear-gradient(180deg, #071018, #0f1720);
   color: var(--accent);
   padding: 12px 14px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid rgb(24, 24, 24);
 }
 .tableHeader th:hover {
@@ -202,6 +202,10 @@ body {
   height: 2em;
   user-select: none;
   cursor: pointer;
+}
+.ownedCheckbox label, .picturedCheckbox label{
+  display: flex;
+  justify-content: center;
 }
 .picturedCheckbox img:hover,
 .ownedCheckbox img:hover {
@@ -284,6 +288,7 @@ tbody td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   vertical-align: middle;
   color: #d8e9ef;
+  text-align: center;
 }
 
 td input[type="checkbox"] {
