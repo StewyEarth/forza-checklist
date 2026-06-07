@@ -7,3 +7,4 @@ A checklist for everyone going through and trying to manage which cars are owned
 ## To do
 * Make multiple filters work at the same time, for more advanced filtering.
 * Make class look more like Forza's PI system
+* Full screen image modal for showing cars better

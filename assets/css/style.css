@@ -14,9 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
-.hidden {
-  display: none;
-}
+
 html,
 body {
   height: 100%;
@@ -306,6 +304,19 @@ td:nth-child(2) {
   font-size: 0.95rem;
 }
 
+.imgModal{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(2, 6, 12, 0.5);
+  display: flex;
+}
+.imgModal img{
+  width: 100%;
+}
+
 @media (max-width: 920px) {
   body {
     padding: 14px;
@@ -340,4 +351,7 @@ td:nth-child(2) {
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 1.2rem;
+}
+.hidden {
+  display: none;
 }
