@@ -132,7 +132,7 @@ function sortAlphabetically(index) {
     if (sorting.index !== index) {
         sorting.direction = "asc";
     }
-    if (index === 0 || index === 1) {
+    if (index === 1 || index === 2) {
         // sort checkboxes
         if (sorting.direction === "asc") {
             rows.sort((a, b) => {
@@ -222,7 +222,7 @@ brandFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let brand = row.children[2].textContent;
+        let brand = row.querySelector(".carBrand").textContent;
         if (selectedBrand === "All" || brand === selectedBrand) {
             carsShown++;
             row.classList.remove("hidden");
