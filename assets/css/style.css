@@ -465,7 +465,6 @@ td:nth-child(2) {
   top: 1em;
   left: 1em;
   z-index: 9;
-  margin: 0.5em 0 0.5em auto;
   backdrop-filter: blur(15px);
   background: linear-gradient(
     180deg,
