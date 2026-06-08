@@ -5,6 +5,10 @@
   --accent: #3dd3ff;
   --accent-2: #7afcff;
   --row-even: #0b1114;
+  --success: rgb(0, 139, 46);
+  --option: rgb(0, 76, 189);
+  --successTrans: rgba(0, 139, 46, 0.7);
+  --optionTrans: rgb(0, 76, 189, 0.7);
 }
 a {
   color: var(--accent);
@@ -36,6 +40,7 @@ body {
 }
 
 .siteHeader {
+  position: relative;
   max-width: 90vw;
   margin: 0 auto 18px;
   padding: 18px 22px;
@@ -93,6 +98,49 @@ body {
   top: 1em;
   z-index: 3;
   backdrop-filter: blur(15px);
+}
+
+.import-exportContainer {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  display: flex;
+  gap: 0.5em;
+}
+.ImExBtn {
+  user-select: none;
+  border-radius: 1em;
+  padding: 0.5em;
+  display: flex;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.importButton {
+  background-color: var(--successTrans);
+}
+.exportButton {
+  background-color: var(--option);
+}
+.ImExImage {
+  user-select: none;
+  width: 2em;
+}
+.ImExText {
+  font-weight: bold;
+  max-width: 0;
+  -webkit-transition: max-width 0.5s;
+  transition: max-width 0.5s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fff;
+}
+.ImExBtn:hover .ImExText {
+  max-width: 10rem;
+  margin: auto 0.5em;
 }
 
 .filters select,
@@ -366,7 +414,8 @@ td:nth-child(2) {
   margin: 0 auto;
 }
 
-.imgModalCarinfo, .imgModalCarNumber {
+.imgModalCarinfo,
+.imgModalCarNumber {
   text-align: center;
   padding: 1em;
   width: 100%;
@@ -382,7 +431,7 @@ td:nth-child(2) {
   border: 1px solid rgba(255, 255, 255, 0.03);
   animation: fadeIn 0.5s;
 }
-.imgModalCarNumber{
+.imgModalCarNumber {
   font-size: 1.2rem;
 }
 
@@ -487,7 +536,7 @@ td:nth-child(2) {
   max-width: 1.2em;
   vertical-align: middle;
 }
-.completedCarsPercent{
+.completedCarsPercent {
   color: var(--accent);
   margin: 0;
   text-align: center;
