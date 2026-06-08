@@ -92,10 +92,12 @@ fileImportUploadElem.addEventListener('change', () => {
 });
 
 function onReaderLoad(event) {
-    console.log(event.target.result);
     let importData = JSON.parse(event.target.result);
-    console.log(importData.cars)
-    console.log(cars)
+    let importedCars = importData.cars
+    cars = importData.cars;
+    document.querySelector("tbody").innerHTML = "";
+    initCars();
+    localStorage.setItem("cars", JSON.stringify(cars));
 }
 
 
@@ -112,7 +114,7 @@ function exportData() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     let date = new Date();
-    date = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`
+    date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}-${date.getMinutes()}`
     a.href = url;
     a.download = `fh6CC-export-${date}.json`;
     document.body.appendChild(a);
