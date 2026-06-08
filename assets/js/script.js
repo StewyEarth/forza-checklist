@@ -266,20 +266,25 @@ function initCars() {
         let carRowTemplate = document.getElementById("carRowTemplate");
         let carRow = carRowTemplate.cloneNode(true);
         let carImgElem = carRow.querySelector(".carImage");
+        let carClassElem = carRow.querySelector(".carClass");
+        let carPI = car.class.substring(0,3);
+        let carLetter = car.class.substring(4);
         carRow.classList.add("carRow")
         carRow.removeAttribute('id');
 
         carImgElem.src = "./assets/img/cars/" + car.img;
         carRow.querySelector(".ownedCheckboxInput").checked = car.owned;
         carRow.querySelector(".picturedCheckboxInput").checked = car.photographed;
-        carRow.children[3].textContent = car.brand;
-        carRow.children[4].textContent = car.name;
-        carRow.children[5].textContent = car.year;
-        carRow.children[6].textContent = car.carType;
-        carRow.children[7].textContent = car.class;
-        carRow.children[8].textContent = car.county;
-        carRow.children[9].textContent = car.collection;
-        carRow.children[10].textContent = car.pack;
+        carRow.querySelector(".carBrand").textContent = car.brand;
+        carRow.querySelector(".carName").textContent = car.name;
+        carRow.querySelector(".carYear").textContent = car.year;
+        carRow.querySelector(".carType").textContent = car.carType;
+        carClassElem.querySelector(".carPI").textContent = carPI;
+        carClassElem.querySelector(".carClassLetter").textContent = carLetter;
+        carClassElem.querySelector(".carclasscontainer").classList.add(`carClass-${carLetter}`)
+        carRow.querySelector(".carCountry").textContent = car.county;
+        carRow.querySelector(".carHowToGet").textContent = car.collection;
+        carRow.querySelector(".carPackNeeded").textContent = car.pack;
         carRow.classList.remove("hidden");
 
 
@@ -484,7 +489,7 @@ carClassFilter.addEventListener("change", () => {
     let rows = carTable.querySelectorAll("tr");
     let carsShown = 0;
     rows.forEach(row => {
-        let carClass = row.querySelector(".carClass").textContent.substring(4);
+        let carClass = row.querySelector(".carClassLetter").textContent;
         if (selectedClass === "All" || carClass === selectedClass) {
             carsShown++;
             row.classList.remove("hidden");

@@ -9,6 +9,15 @@
   --option: rgb(0, 76, 189);
   --successTrans: rgba(0, 139, 46, 0.7);
   --optionTrans: rgb(0, 76, 189, 0.7);
+
+  --carClassD: #42bdf4;
+  --carClassC: #ffc533;
+  --carClassB: #ff632c;
+  --carClassA: #ff1a46;
+  --carClassS1: #b960e8;
+  --carClassS2: #165edb;
+  --carClassR: #d61a9c;
+  --carClassX: #19d858;
 }
 a {
   color: var(--accent);
@@ -141,7 +150,56 @@ body {
 }
 .ImExBtn:hover .ImExText {
   max-width: 10rem;
-    margin: auto 0.5rem;
+  margin: auto 0.5rem;
+}
+
+.carClass {
+  padding: 1em 0;
+  font-weight: bold;
+  width: fit-content;
+}
+.carclasscontainer {
+  width: fit-content;
+  margin: 0 auto;
+}
+.carClass .carPI {
+  background-color: #111;
+  padding: 0 5px;
+}
+.carClass .carClassLetter {
+  padding: 0 5px;
+}
+.carClass-D {
+  background-color: var(--carClassD);
+  border: 2px solid var(--carClassD);
+}
+.carClass-C {
+  background-color: var(--carClassC);
+  border: 2px solid var(--carClassC);
+}
+.carClass-B {
+  background-color: var(--carClassB);
+  border: 2px solid var(--carClassB);
+}
+.carClass-A {
+  background-color: var(--carClassA);
+  border: 2px solid var(--carClassA);
+}
+.carClass-S1 {
+  background-color: var(--carClassS1);
+  border: 2px solid var(--carClassS1);
+}
+.carClass-S2 {
+  background-color: var(--carClassS2);
+  border: 2px solid var(--carClassS2);
+}
+.carClass-R {
+  background-color: var(--carClassR);
+  border: 2px solid var(--carClassR);
+}
+.carClass-X {
+  background-color: var(--carClassX);
+  border: 2px solid var(--carClassX);
 }
 
 .filters select,
@@ -185,7 +243,7 @@ body {
 
 #searchInput {
   min-width: 240px;
-  flex: 1 1 260px;
+  flex: 1 1 3em;
 }
 
 #packFilterForm {
@@ -360,10 +418,12 @@ tbody tr:hover {
 }
 tbody td {
   padding: 12px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   vertical-align: middle;
   color: #d8e9ef;
   text-align: center;
+}
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 td input[type="checkbox"] {
@@ -374,6 +434,9 @@ td input[type="checkbox"] {
 }
 td:nth-child(2) {
   width: 88px;
+}
+.carName{
+  font-weight: bold;
 }
 
 .muted {
