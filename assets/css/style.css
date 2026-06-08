@@ -459,6 +459,8 @@ td:nth-child(2) {
 }
 
 .completedCars {
+  font-weight: bold;
+  font-size: 1.2em;
   position: fixed;
   top: 1em;
   left: 1em;
@@ -477,7 +479,6 @@ td:nth-child(2) {
   width: fit-content;
 }
 #completedCars {
-  font-size: 1.2em;
   display: inline;
   margin: 0;
   font-weight: bold;
@@ -486,6 +487,11 @@ td:nth-child(2) {
 .completedCars img {
   max-width: 1.2em;
   vertical-align: middle;
+}
+.completedCarsPercent{
+  color: var(--accent);
+  margin: 0;
+  text-align: center;
 }
 .fade-image {
   opacity: 0;

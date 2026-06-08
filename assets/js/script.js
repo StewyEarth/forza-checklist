@@ -33,6 +33,7 @@ import carsData from "../data/cars.json" with { type: "json" };
 let cars;
 let completedCars = 0;
 let completedCarsElement = document.querySelector("#completedCars");
+let completedCarsPercentElem = document.querySelector(".completedCarsPercent");
 let carTable = document.querySelector("tbody");
 let totalCars = document.getElementById("totalCars");
 let tableHeader = document.querySelector(".tableHeader");
@@ -207,6 +208,9 @@ function updateCompletedCars() {
         }
     });
     completedCarsElement.textContent = `${completedCars}/${cars.length}`
+    let completedCarPercent = (completedCars / cars.length * 100).toFixed(1);
+    completedCarsPercentElem.textContent = `${completedCarPercent}%`
+
 }
 
 function initCars() {
@@ -270,6 +274,9 @@ function initCars() {
         carTable.appendChild(carRow);
     });
     completedCarsElement.textContent = `${completedCars}/${cars.length}`
+    completedCarsElement.textContent = `${completedCars}/${cars.length}`
+    let completedCarPercent = (completedCars / cars.length * 100).toFixed(1);
+    completedCarsPercentElem.textContent = `${completedCarPercent}%`
 }
 
 initCars();
