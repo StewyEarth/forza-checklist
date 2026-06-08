@@ -102,15 +102,15 @@ body {
 
 .import-exportContainer {
   position: absolute;
-  top: 1em;
-  right: 1em;
+  top: 1rem;
+  right: 1rem;
   display: flex;
-  gap: 0.5em;
+  gap: 0.5rem;
 }
 .ImExBtn {
   user-select: none;
-  border-radius: 1em;
-  padding: 0.5em;
+  border-radius: 1rem;
+  padding: 0.5rem;
   display: flex;
   margin: 0;
   border: none;
@@ -125,9 +125,10 @@ body {
 }
 .ImExImage {
   user-select: none;
-  width: 2em;
+  width: 2rem;
 }
 .ImExText {
+  margin: auto 0;
   font-weight: bold;
   max-width: 0;
   -webkit-transition: max-width 0.5s;
@@ -140,7 +141,7 @@ body {
 }
 .ImExBtn:hover .ImExText {
   max-width: 10rem;
-  margin: auto 0.5em;
+    margin: auto 0.5rem;
 }
 
 .filters select,

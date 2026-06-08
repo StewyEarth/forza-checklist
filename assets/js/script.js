@@ -13,7 +13,7 @@ import carsData from "../data/cars.json" with { type: "json" };
 // 	county: carRow.children[4].textContent,
 // 	collection: carRow.children[5].textContent,
 // 	pack: carRow.children[6].textContent,
-// 	photograped: false,
+// 	photographed: false,
 // 	owned: false,
 // };
 // cars.push(car)
@@ -46,6 +46,8 @@ let carPackFilter = document.getElementById("hidePacksCheckbox");
 let carsShownElement = document.getElementById("carsShown");
 let searchInput = document.getElementById("searchInput");
 let versionElement = document.querySelector("#version");
+let exportBtnElem = document.querySelector(".exportButton");
+let fileImportUploadElem = document.querySelector("#fileUpload")
 
 
 // Img Modal stuff
@@ -77,6 +79,46 @@ function updateData(carsData, updatedCars) {
             photographed: storedCar?.photographed ?? false
         };
     });
+}
+
+fileImportUploadElem.addEventListener('change', () => {
+    if (event.target.files[0].type == "application/json") {
+        let reader = new FileReader();
+        reader.onload = onReaderLoad;
+        reader.readAsText(event.target.files[0]);
+    } else {
+        alert("File type not supported");
+    }
+});
+
+function onReaderLoad(event) {
+    console.log(event.target.result);
+    let importData = JSON.parse(event.target.result);
+    console.log(importData.cars)
+    console.log(cars)
+}
+
+
+exportBtnElem.addEventListener("click", () => {
+    exportData();
+});
+
+function exportData() {
+    let exportData = {
+        "version": carsData.version,
+        "cars": cars
+    }
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    let date = new Date();
+    date = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`
+    a.href = url;
+    a.download = `fh6CC-export-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
 }
 
 function initializeCars() {

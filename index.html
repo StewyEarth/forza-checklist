@@ -20,10 +20,17 @@
                 href="https://www.ign.com/wikis/forza-horizon-6/Car_List" target="_blank">Ign.com</a> & <a
                 target="_blank" href="https://forza.fandom.com/wiki/Forza_Horizon_6"> FH6 Wiki</a> </p>
         <div class="import-exportContainer">
-            <button class="importButton ImExBtn">
+            <form action="">
+                <label for="fileUpload" class="importButton ImExBtn">
+                    <img src="./assets/img/import.svg" alt="import image" class="importImage ImExImage">
+                    <p class="importText ImExText">Import</p>
+                </label>
+                 <input type="file" id="fileUpload" class="hidden" accept=".json"/>
+            </form>
+            <!-- <button class="importButton ImExBtn">
                 <img src="./assets/img/import.svg" alt="import image" class="importImage ImExImage">
                 <p class="importText ImExText">Import</p>
-            </button>
+            </button> -->
             <button class="exportButton ImExBtn">
                 <img src="./assets/img/export.svg" alt="export image" class="exportImage ImExImage">
                 <p class="exportText ImExText">export</p>
