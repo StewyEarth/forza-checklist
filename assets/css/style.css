@@ -168,6 +168,7 @@ body {
 }
 .carClass .carClassLetter {
   padding: 0 5px;
+  user-select: none;
 }
 .carClass-D {
   background-color: var(--carClassD);
@@ -437,6 +438,10 @@ td:nth-child(2) {
 }
 .carName{
   font-weight: bold;
+}
+.carHowToGet{
+  text-wrap: balance;
+  font-size: .9rem;
 }
 
 .muted {
