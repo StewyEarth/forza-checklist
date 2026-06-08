@@ -11,26 +11,34 @@
 
 <body>
     <header class="siteHeader">
-        <h1>Forza Checklist v<span id="version"></span></h1>
+        <p class="totalCars">Total cars: <span id="totalCars" class="muted">0</span>
+        </p>
+        <p class="subtitle">Dataversion: <span id="version"></span></p>
+        <h1>Forza Horizon 6 Car Checklist</h1>
         <p class="subtitle">Track your FH6 collection - clean, fast, and responsive. Info is from <a
                 href="https://forza.net/fh6cars" target="_blank">Forza.net</a>. Car images are from <a
                 href="https://www.ign.com/wikis/forza-horizon-6/Car_List" target="_blank">Ign.com</a> & <a
                 target="_blank" href="https://forza.fandom.com/wiki/Forza_Horizon_6"> FH6 Wiki</a> </p>
-        <p class="totalCars">Total cars: <span id="carsShown">618/</span><span id="totalCars" class="muted">0</span>
-        </p>
+
+
     </header>
 
     <main class="container">
         <div class="imgModal hidden">
             <div class="imgModalContent">
+                <h2 class="imgModalCarNumber"></h2>
                 <img src="./assets/img/cars/unknown.png" alt="" class="imgModal-Picture">
                 <h2 class="imgModalCarinfo"></h2>
             </div>
-            <button class="imgModal-prev"><</button>
-            <button class="imgModal-next">></button>
-            <button class="imgModal-close">X</button>
+            <button class="imgModal-prev">
+                < </button>
+                    <button class="imgModal-next">></button>
+                    <button class="imgModal-close">X</button>
         </div>
-        <h2 class="filtersHeader">Filters: </h2>
+        <div class="filterHeaderContainer">
+            <h2 class="filtersHeader">Filters: </h2>
+            <p class="filteredCars">Filtered cars: <span id="carsShown">618</span></p>
+        </div>
         <div class="filters">
             <select name="collectionStatus" id="collectionStatusFilter">
                 <option value="All">Collection Status</option>
@@ -66,6 +74,11 @@
             </form>
             <input type="text" id="searchInput" placeholder="Search by car name...">
         </div>
+        <div class="completedCars">
+            <p id="completedCars">0/618</p>
+            <img src="./assets/img/completed.svg" alt="completed">
+
+        </div>
         <div class="tableWrap">
             <table class="carsTable">
                 <thead>
@@ -92,7 +105,7 @@
         <table>
             <tbody>
                 <tr id="carRowTemplate" class="hidden">
-                    <td class="carImage"><img src="assets/img/cars/unknown.png" alt="unknown"></td>
+                    <td><img src="assets/img/cars/unknown.png" class="carImage fade-image" alt="unknown"></td>
                     <td class="ownedCheckbox">
                         <label>
                             <input type="checkbox" class="ownedCheckboxInput">

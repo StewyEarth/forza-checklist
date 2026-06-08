@@ -60,6 +60,13 @@ body {
   color: var(--muted);
   font-size: 0.95rem;
 }
+
+.filterHeaderContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
 .filters {
   display: flex;
   align-items: center;
@@ -82,6 +89,10 @@ body {
   box-shadow: 0 6px 18px rgba(2, 6, 12, 0.5);
   flex-wrap: wrap;
   margin-bottom: 1em;
+  position: sticky;
+  top: 1em;
+  z-index: 3;
+  backdrop-filter: blur(15px);
 }
 
 .filters select,
@@ -188,14 +199,23 @@ body {
   color: var(--accent-2);
   transition: color 0.12s ease;
 }
-.carImage img {
+.carImage {
   max-width: 150px;
   user-select: none;
   cursor: pointer;
   transition: all 0.1s;
 }
-.carImage img:hover {
+.carImage:hover {
   transform: scale(1.1);
+}
+
+.fade-image {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-image.loaded {
+  opacity: 1;
 }
 
 .picturedCheckbox img,
@@ -322,6 +342,7 @@ td:nth-child(2) {
   z-index: 999;
   align-content: center;
   justify-content: center;
+  backdrop-filter: blur(5px);
 }
 .imgModal button {
   position: absolute;
@@ -345,12 +366,24 @@ td:nth-child(2) {
   margin: 0 auto;
 }
 
-.imgModalCarinfo {
+.imgModalCarinfo, .imgModalCarNumber {
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
   padding: 1em;
   width: 100%;
   border-radius: 2em;
+  width: fit-content;
+  margin: 0 auto;
+  backdrop-filter: blur(15px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  animation: fadeIn 0.5s;
+}
+.imgModalCarNumber{
+  font-size: 1.2rem;
 }
 
 .imgModal .imgModal-prev {
@@ -373,6 +406,17 @@ td:nth-child(2) {
   animation: zoomIn 0.5s;
   user-select: none;
   pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 @keyframes zoomIn {
@@ -413,6 +457,49 @@ td:nth-child(2) {
   color: var(--muted);
   font-size: 1.2rem;
 }
+
+.completedCars {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 9;
+  margin: 0.5em 0 0.5em auto;
+  backdrop-filter: blur(15px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(2, 6, 12, 0.5);
+  padding: 0.5em;
+  width: fit-content;
+}
+#completedCars {
+  font-size: 1.2em;
+  display: inline;
+  margin: 0;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.completedCars img {
+  max-width: 1.2em;
+  vertical-align: middle;
+}
+.fade-image {
+  opacity: 0;
+  filter: blur(10px);
+  transition:
+    opacity 400ms ease,
+    filter 400ms ease;
+}
+
+.fade-image.loaded {
+  opacity: 1;
+  filter: blur(0);
+}
+
 .hidden {
   display: none;
 }

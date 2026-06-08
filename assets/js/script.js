@@ -31,6 +31,8 @@ import carsData from "../data/cars.json" with { type: "json" };
 //     console.log(urls)
 // })();
 let cars;
+let completedCars = 0;
+let completedCarsElement = document.querySelector("#completedCars");
 let carTable = document.querySelector("tbody");
 let totalCars = document.getElementById("totalCars");
 let tableHeader = document.querySelector(".tableHeader");
@@ -44,10 +46,17 @@ let carsShownElement = document.getElementById("carsShown");
 let searchInput = document.getElementById("searchInput");
 let versionElement = document.querySelector("#version");
 
+
+// Img Modal stuff
 let imgModalElement = document.querySelector(".imgModal");
 let imgModalPictureElement = document.querySelector(".imgModal-Picture");
 let imgModalCloseBtnElement = document.querySelector(".imgModal-close");
 let imgModalCarinfoElem = document.querySelector(".imgModalCarinfo");
+let imgModalCarNumberElem = document.querySelector(".imgModalCarNumber");
+let prevImgElem = imgModalElement.querySelector(".imgModal-prev");
+let nextImgElem = imgModalElement.querySelector(".imgModal-next");
+let nextCarElem = undefined;
+let PrevCarElem = undefined;
 
 
 function updateData(carsData, updatedCars) {
@@ -187,48 +196,134 @@ function sortAlphabetically(index) {
     sorting.index = index;
 }
 
-// set total cars header & create table rows
-totalCars.textContent = cars.length;
-cars.forEach(car => {
-    let carRowTemplate = document.getElementById("carRowTemplate");
-    let carRow = carRowTemplate.cloneNode(true);
-    // let carRow = document.createElement("tr");
-
-    carRow.children[0].querySelector("img").src = "./assets/img/cars/" + car.img;
-    carRow.querySelector(".ownedCheckboxInput").checked = car.owned;
-    carRow.querySelector(".picturedCheckboxInput").checked = car.photographed;
-    carRow.children[3].textContent = car.brand;
-    carRow.children[4].textContent = car.name;
-    carRow.children[5].textContent = car.year;
-    carRow.children[6].textContent = car.carType;
-    carRow.children[7].textContent = car.class;
-    carRow.children[8].textContent = car.county;
-    carRow.children[9].textContent = car.collection;
-    carRow.children[10].textContent = car.pack;
-    carRow.classList.remove("hidden");
-
-
-    carRow.querySelector(".ownedCheckboxInput").addEventListener("change", () => {
-        car.owned = carRow.querySelector(".ownedCheckboxInput").checked;
-        localStorage.setItem("cars", JSON.stringify(cars));
+function updateCompletedCars() {
+    completedCars = 0;
+    let carRowsElems = document.querySelectorAll(".carRow");
+    carRowsElems.forEach(carRow => {
+        let ownedCheck = carRow.querySelector(".ownedCheckboxInput").checked;
+        let pictureCheck = carRow.querySelector(".picturedCheckboxInput").checked;
+        if (ownedCheck && pictureCheck) {
+            completedCars++
+        }
     });
-    carRow.querySelector(".picturedCheckboxInput").addEventListener("change", () => {
-        car.photographed = carRow.querySelector(".picturedCheckboxInput").checked;
-        localStorage.setItem("cars", JSON.stringify(cars));
-    });
+    completedCarsElement.textContent = `${completedCars}/${cars.length}`
+}
 
-    carRow.querySelector(".carImage").addEventListener("click", () => {
-        imgModalElement.classList.remove("hidden");
-        imgModalPictureElement.src = "./assets/img/cars/" + car.img;
-        imgModalCarinfoElem.textContent = `${car.year} - ${car.name}`
-    });
+function initCars() {
 
-    carTable.appendChild(carRow);
-});
+    completedCars = 0;
+    // set total cars header & create table rows
+    totalCars.textContent = cars.length;
+    cars.forEach(car => {
+        let carRowTemplate = document.getElementById("carRowTemplate");
+        let carRow = carRowTemplate.cloneNode(true);
+        let carImgElem = carRow.querySelector(".carImage");
+        carRow.classList.add("carRow")
+        carRow.removeAttribute('id');
+
+        carImgElem.src = "./assets/img/cars/" + car.img;
+        carRow.querySelector(".ownedCheckboxInput").checked = car.owned;
+        carRow.querySelector(".picturedCheckboxInput").checked = car.photographed;
+        carRow.children[3].textContent = car.brand;
+        carRow.children[4].textContent = car.name;
+        carRow.children[5].textContent = car.year;
+        carRow.children[6].textContent = car.carType;
+        carRow.children[7].textContent = car.class;
+        carRow.children[8].textContent = car.county;
+        carRow.children[9].textContent = car.collection;
+        carRow.children[10].textContent = car.pack;
+        carRow.classList.remove("hidden");
+
+
+        if (carImgElem.complete) {
+            // Already loaded (e.g. from cache)
+            carImgElem.classList.add('loaded');
+        } else {
+            carImgElem.addEventListener('load', () => {
+                carImgElem.classList.add('loaded');
+            });
+        }
+        carRow.dataset.id = car.id;
+
+        carRow.querySelector(".ownedCheckboxInput").addEventListener("change", () => {
+            car.owned = carRow.querySelector(".ownedCheckboxInput").checked;
+            localStorage.setItem("cars", JSON.stringify(cars));
+            updateCompletedCars();
+        });
+        carRow.querySelector(".picturedCheckboxInput").addEventListener("change", () => {
+            car.photographed = carRow.querySelector(".picturedCheckboxInput").checked;
+            localStorage.setItem("cars", JSON.stringify(cars));
+            updateCompletedCars();
+        });
+
+        carRow.querySelector(".carImage").addEventListener("click", () => {
+            imgModalElement.classList.remove("hidden");
+            imgModalElement.dataset.id = car.id
+            imgModalPictureElement.src = "./assets/img/cars/" + car.img;
+            imgModalCarinfoElem.textContent = `${car.year} - ${car.name}`
+            imgModalCarNumberElem.textContent = `${car.id}/${cars.length}`
+        });
+
+        if (car.owned && car.photographed) {
+            completedCars++
+        }
+        carTable.appendChild(carRow);
+    });
+    completedCarsElement.textContent = `${completedCars}/${cars.length}`
+}
+
+initCars();
 
 imgModalCloseBtnElement.addEventListener("click", () => {
     imgModalElement.classList.add("hidden");
 });
+document.addEventListener("keydown", (e) => {
+    if (!imgModalElement.classList.contains("hidden")) {
+        if (e.code == "ArrowLeft") {
+            getImgModalCar("prev")
+        }
+        if (e.code == "ArrowRight") {
+            getImgModalCar("next")
+
+        }
+        if (e.code == "Escape") {
+            imgModalElement.classList.add("hidden")
+        }
+    }
+})
+
+
+function getImgModalCar(direction) {
+    imgModalElement = document.querySelector(".imgModal");
+    let currentCar = imgModalElement.dataset.id;
+    if (direction == "prev") {
+        currentCar--
+        currentCar = currentCar < 1 ? cars.length : currentCar;
+    }
+    if (direction == "next") {
+        currentCar++
+        currentCar = currentCar > cars.length ? 1 : currentCar;
+    }
+    updateModal(currentCar)
+}
+
+function updateModal(updatecar) {
+    nextCarElem = document.querySelector(`[data-id="${updatecar}"]`);
+    imgModalElement.dataset.id = updatecar;
+    imgModalPictureElement.src = nextCarElem.querySelector(".carImage").src;
+    imgModalCarNumberElem.textContent = `${updatecar}/${cars.length}`
+    imgModalCarinfoElem.textContent = `${nextCarElem.querySelector(".carYear").textContent} - ${nextCarElem.querySelector(".carName").textContent}`
+}
+
+prevImgElem.addEventListener("click", () => {
+    getImgModalCar("prev")
+})
+
+nextImgElem.addEventListener("click", () => {
+    getImgModalCar("next")
+})
+
+
 
 
 // --------------- FILTERS ---------------- 
@@ -246,7 +341,7 @@ brandFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 collectionStatusFilter.addEventListener("change", () => {
@@ -266,7 +361,7 @@ collectionStatusFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 carCountryFilter.addEventListener("change", () => {
     let selectedCountry = carCountryFilter.value;
@@ -281,7 +376,7 @@ carCountryFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 carTypeFilter.addEventListener("change", () => {
@@ -298,7 +393,7 @@ carTypeFilter.addEventListener("change", () => {
         }
     })
 
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 carYearFilter.addEventListener("change", () => {
@@ -314,7 +409,7 @@ carYearFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 carPackFilter.addEventListener("change", () => {
@@ -330,7 +425,7 @@ carPackFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
-    carsShownElement.textContent = `${carsShown}/`;
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 carClassFilter.addEventListener("change", () => {
@@ -346,6 +441,7 @@ carClassFilter.addEventListener("change", () => {
             row.classList.add("hidden");
         }
     })
+    carsShownElement.textContent = `${carsShown}`;
 });
 
 searchInput.addEventListener("input", () => {
